@@ -734,7 +734,8 @@ function displayInfowindow(marker, place) {
     
     if (Mobile()){
         var strArry=place_url.split('place.map.kakao.com/');
-        place_url=strArry[0]+"place.map.kakao.com/m/"+strArry[1];
+        //place_url = strArry[0] + "place.map.kakao.com/m/" + strArry[1];
+        place_url = "https://" + "place.map.kakao.com/m/" + strArry[1];
     }
 
 
