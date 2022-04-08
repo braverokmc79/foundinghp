@@ -203,6 +203,10 @@ function locationLoadError(pos){
     
 };
 
+function replaceAll(str, searchStr, replaceStr) {
+    return str.split(searchStr).join(replaceStr);
+}
+
 // 위치 가져오기 버튼 클릭시
 function getCurrentPosBtn(){
     navigator.geolocation.getCurrentPosition(locationLoadSuccess,locationLoadError);
@@ -734,10 +738,11 @@ function displayInfowindow(marker, place) {
     
     if (Mobile()){
         var strArry=place_url.split('place.map.kakao.com/');
-        //place_url = strArry[0] + "place.map.kakao.com/m/" + strArry[1];
-        place_url = "https://" + "place.map.kakao.com/m/" + strArry[1];
+        place_url = strArry[0] + "place.map.kakao.com/m/" + strArry[1];
+        //place_url = "https://" + "place.map.kakao.com/m/" + strArry[1];
     }
 
+    place_url = replaceAll(place_url, 'http://', 'https://');
 
     var content = '<div class="placeinfo" style="z-index:5">';               
         content += '   <a class="title" href="detail.html?url=' + place.place_url + '" target="_self" title="' + place.place_name + '">'
@@ -794,7 +799,7 @@ function displayPlaceInfo (place) {
         place_url=strArry[0]+"place.map.kakao.com/m/"+strArry[1];
     }
    
-
+    place_url = replaceAll(place_url, 'http://', 'https://');
 
     var content = '<div class="placeinfo" style="z-index:5">' +
                     '   <a class="title" href="detail.html?url=' + place.place_url + '" target="_self" title="' + place.place_name + '">' + place.place_name + '</a>';   
