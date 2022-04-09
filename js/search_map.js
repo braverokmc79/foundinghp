@@ -106,7 +106,9 @@ function closeOverlay() {
 
 
 
-
+function replaceAll(str, searchStr, replaceStr) {
+    return str.split(searchStr).join(replaceStr);
+}
 
 
 //****************************************************************************************************
@@ -737,17 +739,20 @@ function displayPagination(pagination) {
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, place) {
     //var content = '<div style="padding:5px;z-index:1;">' + place.place_name + '</div>';
-    var content="";
+    var content = "";
+   
+    var place_url = replaceAll(place.place_url, 'http://', 'https://');
+
     if(SEARCH_TYPE){
         //검색처리 일경우
         content= '<div class="placeinfo  placeinfo-search " style="z-index:5">';               
-        content += '   <a class="title" href="detail.html?url=' + place.place_url + '" target="_self" title="' + place.place_name + '">'         
+        content += '   <a class="title" href="detail.html?url=' + place_url + '" target="_self" title="' + place.place_name + '">'         
         content += '<span>'+ place.place_name + '</span></a>';  
 
     }else{
         //병원 메뉴 클릭했을 경우
         content = '<div class="placeinfo " style="z-index:5">';               
-        content += '   <a class="title" href="detail.html?url=' + place.place_url + '" target="_self" title="' + place.place_name + '">'
+        content += '   <a class="title" href="detail.html?url=' + place_url + '" target="_self" title="' + place.place_name + '">'
         content += '<img src="images/logo.png">';            
         content += '<span>'+ place.place_name + '</span></a>';   
     }
@@ -794,18 +799,20 @@ function removeAllChildNods(el) {
 function displayPlaceInfo (place) {
     //console.log("place.place_url  : " +place.place_url );
 
-    var content="";
+    var content = "";
+    
+    var place_url = replaceAll(place.place_url, 'http://', 'https://');
 
     if(SEARCH_TYPE){
         //검색처리 일경우
         content= '<div class="placeinfo placeinfo-search " style="z-index:5">';               
-        content += '   <a class="title" href="detail.html?url=' + place.place_url + '" target="_self" title="' + place.place_name + '">'         
+        content += '   <a class="title" href="detail.html?url=' + place_url + '" target="_self" title="' + place.place_name + '">'         
         content += '<span>'+ place.place_name + '</span></a>';  
 
     }else{
         //병원 메뉴 클릭했을 경우
         content = '<div class="placeinfo " style="z-index:5">';               
-        content += '   <a class="title" href="detail.html?url=' + place.place_url + '" target="_self" title="' + place.place_name + '">'
+        content += '   <a class="title" href="detail.html?url=' + place_url + '" target="_self" title="' + place.place_name + '">'
         content += '<img src="images/logo.png">';            
         content += '<span>'+ place.place_name + '</span></a>';   
     }
